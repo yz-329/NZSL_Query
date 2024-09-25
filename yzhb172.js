@@ -1,3 +1,5 @@
+
+
 async function fetchVersion() {
     version_url = "https://cws.auckland.ac.nz/nzsl/api/Version";
     const response = await fetch(version_url);
