@@ -15,11 +15,11 @@
         <img src="https://cws.auckland.ac.nz/nzsl/api/Logo"/>
 
         <div class="tab">
-            <button onclick="openTab('Home')">Home</button>
-            <button onclick="openTab('NZSL')">NZSL</button>
-            <button onclick="openTab('Events')">Events</button>
-            <button onclick="openTab('User')">User</button>
-            <button onclick="openTab('Guest Book')">Guest Book</button>
+            <button onclick="openTab('home')" id="defaultOpen">Home</button>
+            <button onclick="openTab('nzsl')">NZSL</button>
+            <button onclick="openTab('events')">Events</button>
+            <button onclick="openTab('user')">User</button>
+            <button onclick="openTab('guest-book')">Guest Book</button>
         </div>
         
     </header>
@@ -35,23 +35,92 @@
 
 
     <div id="nzsl" class="main-container">
-        <div class="main-page">
-
-            <div class="nzsl-search"></div>
-
-            <ul class="image-container"></ul>
+        <div class="nzsl-search">
+            <div class="search-container">
+                <form id="search-form">
+                    <input type="text" id="search-input" placeholder="Search by id or keywords..." required>
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        
+    
+            <div id="search-results"></div>
 
         </div>
+
+        <div id="image-container">
+            <!-- <div class="image-item">
+                <img src="" alt=""/>
+            </div> -->
+        </div>
+    </div>
+
+
+    <div id="events" class="main-container">
+        <div id="events-container">
+            <!-- <div class="event-item">
+
+            </div> -->
+        </div>
+
+
+    </div>
+
+
+    <div id="user" class="main-container">
+        <div id="logout-container"></div>
+        <div class="form-container">
+            <h1>User Registration</h1>
+            <form id="registration-form" class="input-container">
+                <label for="username-input">Username:</label>
+                <input type="text" id="username-input" name="username" required>
+                
+                <label for="password-input">Password:</label>
+                <input type="password" id="password-input" name="password" required>
+
+                <label for="addr-input">Address:</label>
+                <input type="text" id="addr-input" name="address" required>
+                
+                <button type="submit">Register</button>
+            </form>
+        </div>
         
+        <div class="form-container">
+            <h1>User Login</h1>
+            <form id="login-form" class="input-container">
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" name="username" required>
+                
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        
+
+    </div>
+
+    <div id="guest-book" class="main-container">
+        <div class="comment-form-container">
+            <h2>Post Your Comment</h2>
+            <form id="comment-form">
+                <label for="comment-input">Comment:</label>
+                <input type="text" id="comment-input" name="comment" required>
+                <button type="submit">Post</button>
+            </form>
+        </div>
+
+        <div id="comment-container">
+
+        </div>
     </div>
 
 
 
 
 
-    <footer>
-        <div id="version"></div>
-    </footer>
     
 </body>
+<footer><div id="version"></div></footer>
 </html>

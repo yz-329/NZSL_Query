@@ -37,7 +37,7 @@ header button {
 }
 
 header button:hover {
-    background-color: #C6C7C4;
+    background-color: #353B3C;
     color: #EEF0F2;
 }
 
@@ -52,9 +52,114 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
-/* 
-.main-page {
-    margin: 10ex;
-} */
+#nzsl {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#image-container {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.image-item {
+    width: 400px;
+    height: 250px;
+    background-color: #C6C7C4;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image-item img {
+    height: 60%;
+    width: auto;
+    margin-top: 15px;
+}
+
+.image-item .description {
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+
+/*Event*/
+.event-item {
+    margin-top: 5ex;
+}
+
+
+
+/*User*/
+
+#user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 5ex;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2ex;
+}
+
+
+/*Comment*/
+#guest-book {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+}
+
+#comment-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items:flex-start;
+    margin: 5ex;
+}
+
+#comment-input {
+    width: 80vw;
+    height: 60px;
+    text-align: start;
+    margin-bottom: 1ex;
+}
+
+iframe{
+    width: 80vw;
+    height: 600px;
+    background-color: #353B3C;
+}
+
+
+
+
