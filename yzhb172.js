@@ -37,6 +37,9 @@ function openTab(tabName) {
         postComment();
         loadComment();
     }
+    else if (tabName == "log") {
+        logSVG()
+    }
  
 }
 
@@ -323,6 +326,10 @@ async function postComment() {
     });
 }
 
+
+async function logSVG() {
+    
+}
 
 
 
