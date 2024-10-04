@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000px" height="1000px">
-    <rect x="138" y="425" width="100" height="350" rx="50" ry="50" fill="grey"/>
-    <rect x="300" y="100" width="100" height="400" rx="50" ry="50" fill="grey"/>
-    <rect x="425" y="25" width="100" height="435" rx="50" ry="50" fill="grey"/>
-    <rect x="550" y="90" width="100" height="385" rx="50" ry="50" fill="grey"/>
-    <rect x="675" y="225" width="100" height="340" rx="50" ry="50" fill="grey"/>
-    <ellipse cx="500" cy="725" rx="250" ry="250" fill="grey"/>
+<svg xmlns="http://www.w3.org/2000/svg" id="svg-logo" viewBox="0 0 1000 1000">
+    <rect x="138" y="425" width="100" height="350" rx="50" ry="50" fill="#a9a9a9"/>
+    <rect x="300" y="100" width="100" height="400" rx="50" ry="50" fill="#a9a9a9"/>
+    <rect x="425" y="25" width="100" height="435" rx="50" ry="50" fill="#a9a9a9"/>
+    <rect x="550" y="90" width="100" height="385" rx="50" ry="50" fill="#a9a9a9"/>
+    <rect x="675" y="225" width="100" height="340" rx="50" ry="50" fill="#a9a9a9"/>
+    <ellipse cx="500" cy="725" rx="250" ry="250" fill="#a9a9a9"/>
 </svg>

@@ -41,12 +41,7 @@ header button:hover {
     color: #EEF0F2;
 }
 
-footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    padding-left: 10ex;
-}
+
 
 .main-container {
     display: flex;
@@ -154,7 +149,7 @@ footer {
     margin-bottom: 1ex;
 }
 
-iframe{
+iframe {
     width: 80vw;
     height: 600px;
     background-color: #353B3C;
@@ -162,4 +157,30 @@ iframe{
 
 
 
+#log {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
+#log-container {
+    width: 60vw;
+    
+}
+
+#x-axis {
+    width: 60vw;
+}
+
+#log-legend {
+    width: 60vw;
+}
+
+#all-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+}

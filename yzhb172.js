@@ -38,7 +38,7 @@ function openTab(tabName) {
         loadComment();
     }
     else if (tabName == "log") {
-        logSVG()
+        logSVG();
     }
  
 }
@@ -327,7 +327,183 @@ async function postComment() {
 }
 
 
+function findX(xIndex, lenData) {
+    const position = 1000 / (lenData - 1);
+    return xIndex * position;
+}
+
+function findY(y, maxY, minY) {
+    return 600 - ((y - minY) / (maxY - minY)) * 600;
+}
+
+
+function drawPath(data, attr, maxY, minY) {
+
+    let path = `M ${findX(0, data.length)} ${findY(data[0][attr], maxY, minY)}`;
+
+    for (let i = 1; i < data.length; i++) {
+        path += ` L ${findX(i, data.length)} ${findY(data[i][attr], maxY, minY)}`;
+    }
+
+    return path;
+}
+
+
 async function logSVG() {
+    let width = 1000;
+    const container = document.getElementById("log-container");
+    container.innerHTML = '';
+
+    let ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", `0 0 ${width} 600`);
+    svg.style.border = "2px solid black";
+
+    const resp = await fetch("https://cws.auckland.ac.nz/nzsl/api/Log");
+    const data = await resp.json();
+
+    const allVisits = data.map(item => item.visits);
+    const allUniqueVisits = data.map(item => item.uniqueVisits);
+
+    // alert(allVisits);
+    // alert(allUniqueVisits);
+
+
+    // y-axis label
+    const maxY = Math.max(...allVisits, ...allUniqueVisits);
+    const minY = Math.min(...allVisits, ...allUniqueVisits);
+
+    const YLabelMax = document.createElementNS(ns, "text");
+    YLabelMax.textContent = `${maxY}`;
+    YLabelMax.setAttribute('x', 10);
+    YLabelMax.setAttribute('y', 17);
+    YLabelMax.setAttribute('font-size', '18');
+    YLabelMax.setAttribute('fill', 'black');
+
+    const YLabelMin = document.createElementNS(ns, "text");
+    YLabelMin.textContent = `${minY}`;
+    YLabelMin.setAttribute('x', 10);
+    YLabelMin.setAttribute('y', 600);
+    YLabelMin.setAttribute('font-size', '18');
+    YLabelMin.setAttribute('fill', 'black');
+
+    svg.appendChild(YLabelMax);
+    svg.appendChild(YLabelMin);
+
+
+    const allDate = data.map(item => item.date);
+    const minX = allDate[0];
+    const maxX = allDate[allDate.length - 1];
+
+    // alert(`${minX}, ${maxX}`);
+    
+    const lineVisit = document.createElementNS(ns, 'path')
+    const lineUniq = document.createElementNS(ns, 'path')
+    
+    const pathVisit = drawPath(data, 'visits', maxY, minY);
+    lineVisit.setAttribute("d", pathVisit);
+    lineVisit.setAttribute("fill", "none");
+    lineVisit.setAttribute("stroke", "blue");
+    lineVisit.setAttribute("stroke-width", "3");
+    
+    const pathUniq = drawPath(data, 'uniqueVisits', maxY, minY);
+    lineUniq.setAttribute("d", pathUniq);
+    lineUniq.setAttribute("fill", "none");
+    lineUniq.setAttribute("stroke", "red");
+    lineUniq.setAttribute("stroke-width", "3");
+    
+    svg.appendChild(lineVisit);
+    svg.appendChild(lineUniq);
+    container.appendChild(svg);
+
+
+    // x-axis label  
+    const axis = document.getElementById("x-axis");
+    axis.innerHTML = "";
+    const xLabelsvg = document.createElementNS(ns, "svg");
+    xLabelsvg.setAttribute("viewBox", `0 0 ${width} 100`);
+
+    const xLabelMin = document.createElementNS(ns, "text");
+    xLabelMin.textContent = `${minX}`;
+    xLabelMin.setAttribute('x', 0);
+    xLabelMin.setAttribute('y', 50);
+    xLabelMin.setAttribute('font-size', '24');
+    xLabelMin.setAttribute('fill', 'black');
+
+    const xLabelMax = document.createElementNS(ns, "text");
+    xLabelMax.textContent = `${maxX}`;
+    xLabelMax.setAttribute('x', `${width - 125}`);
+    xLabelMax.setAttribute('y', 50);
+    xLabelMax.setAttribute('font-size', '24');
+    xLabelMax.setAttribute('fill', 'black');
+
+    xLabelsvg.appendChild(xLabelMin);
+    xLabelsvg.appendChild(xLabelMax);
+    axis.appendChild(xLabelsvg);
+
+
+    // legend container
+    const legendContainer = document.getElementById("log-legend");
+    legendContainer.innerHTML = "";
+    
+    const legendsvg = document.createElementNS(ns, "svg");
+    legendsvg.setAttribute("viewBox", `0 0 ${width} 100`);
+    
+    const legend = document.createElementNS(ns, 'text');
+    legend.textContent = "Legend: ";
+    legend.setAttribute('x', 0);
+    legend.setAttribute('y', 30);
+    legend.setAttribute('font-size', '24');
+    legend.setAttribute('fill', 'black');
+
+    legendsvg.appendChild(legend);
+
+    const legendVisit = document.createElementNS(ns, "path");
+    legendVisit.setAttribute("d", "M 100 22 L 150 22");
+    legendVisit.setAttribute("fill", "none");
+    legendVisit.setAttribute("stroke", "blue");
+    legendVisit.setAttribute("stroke-width", "3");
+
+    const legendVisitText = document.createElementNS(ns, 'text');
+    legendVisitText.textContent = "Visit";
+    legendVisitText.setAttribute('x', 160);
+    legendVisitText.setAttribute('y', 30);
+    legendVisitText.setAttribute('font-size', '24');
+    legendVisitText.setAttribute('fill', 'black');
+
+    const legendUniq = document.createElementNS(ns, "path");
+    legendUniq.setAttribute("d", "M 230 22 L 280 22");
+    legendUniq.setAttribute("fill", "none");
+    legendUniq.setAttribute("stroke", "red");
+    legendUniq.setAttribute("stroke-width", "3");
+
+    const legendUniqText = document.createElementNS(ns, 'text');
+    legendUniqText.textContent = "Unique Visit";
+    legendUniqText.setAttribute('x', 290);
+    legendUniqText.setAttribute('y', 30);
+    legendUniqText.setAttribute('font-size', '24');
+    legendUniqText.setAttribute('fill', 'black');
+
+    legendsvg.appendChild(legendVisit);
+    legendsvg.appendChild(legendVisitText);
+    legendsvg.appendChild(legendUniq);
+    legendsvg.appendChild(legendUniqText);
+
+    legendContainer.append(legendsvg);
+
+    const allData = document.getElementById("all-data");
+    allData.innerHTML = "";
+
+    visitText = document.createElement('p');
+    visitText.textContent = `${allVisits}`;
+
+    uniqueText = document.createElement('p');
+    uniqueText.textContent = `${allUniqueVisits}`;
+
+    allData.appendChild(visitText);
+    allData.appendChild(uniqueText);
+    
+    
     
 }
 
